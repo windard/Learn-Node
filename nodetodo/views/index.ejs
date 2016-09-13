@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <script>
+    </script>
+  </head>
+  <body>
+  <div class="container">
+    <div class="container-fluid">
+          <header>
+              <h1 class="strong">Node TODO</h1>
+              <hr>
+          </header>
+          <div class="content">
+          <% if(error){ %>
+              <div class="alert alert-danger fade in" role="alert">
+                  <%= error %>
+                  <button type="button" class="close" aria-label="Close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+              </div>
+          <% } %>
+          <% if(success){ %>
+              <div class="alert alert-success fade in" role="alert">
+                  <%= success %>
+                  <button type="button" class="close" aria-label="Close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+              </div>
+          <% }%>
+              <h3 class="text-info">待办任务</h3>
+              <table class="table table-hover table-responsive">
+                  <thead>
+                      <tr>
+                          <td>优先级</td>
+                          <td>内容</td>
+                          <td>开始时间</td>
+                          <td>结束时间</td>
+                          <td>操作</td>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  <%
+                        Date.prototype.Format = function(fmt)
+                        { //author: meizz
+                          var o = {
+                            "M+" : this.getMonth()+1,                 //月份
+                            "d+" : this.getDate(),                    //日
+                            "h+" : this.getHours(),                   //小时
+                            "m+" : this.getMinutes(),                 //分
+                            "s+" : this.getSeconds(),                 //秒
+                            "q+" : Math.floor((this.getMonth()+3)/3), //季度
+                            "S"  : this.getMilliseconds()             //毫秒
+                          };
+                          if(/(y+)/.test(fmt))
+                            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+                          for(var k in o)
+                            if(new RegExp("("+ k +")").test(fmt))
+                          fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+                          return fmt;
+                        }
+                        var priorities = ["first","second","third","forth"];
+                        notes.forEach(function(note){
+                  %>
+                        <tr>
+                        <td><div class="priority <%= priorities[note['priority']]%>"></div></td>
+                          <td>
+                            <% if(note['has_finished']){%>
+                            <del><%= note['content']%></del>
+                              <%}else{%>
+                            <%= note['content']%>
+                              <%}%>
+                          </td>
+                          <td><%= note['start'].Format('yyyy-MM-dd hh:mm')%></td>
+                          <td>
+                              <% if(note['end']){%>
+                                <%= note['end'].Format('yyyy-MM-dd hh:mm')%>
+                              <%}%>
+                          </td>
+                          <td><a href="/<%= note['id']%>/<% if(note['has_finished']){%>backout<%}else{%>finish<%}%>" class="btn btn-success">
+                            <% if(note['has_finished']){%>
+                            撤销
+                              <%}else{%>
+                            完成
+                              <%}%>
+                          </a>&nbsp;<a href="javascript:void(0)" class="btn btn-primary" data-id="<%= note['id']%>">修改</a>&nbsp;<a href="/<%= note['id']%>/delete" class="btn btn-danger">删除</a></td>
+                      </tr>
+                  <% }) %>
+                  </tbody>
+              </table>
+              <hr>
+              <h3 class="text-info">添加任务</h3>
+              <form action="/new" class="form-inline" method="post" id="new">
+                  <div class="form-group">
+                    <select name="priority" id="priority" class="form-control text-center">
+                        <option value="0" class="first">0</option>
+                        <option value="1" class="second">1</option>
+                        <option value="2" class="third">2</option>
+                        <option value="3" class="forth">3</option>
+                    </select>
+                      <input type="text" class="form-control" id="content" placeholder="Add Something" name="content">
+                      &nbsp;
+                      <button class="btn btn-info" type="submit">新建</button>
+                  </div>
+              </form>
+              <br>
+              <hr>
+              <footer>
+                    <p><a href="http://simple.wenqiangyang.com">Windard</a> 2016</p>
+              </footer>
+          </div>
+    </div>
+  </div>
+    <script src="/javascripts/jquery-1.11.3.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('a.btn-primary').click(function(){
+                if ($('form').length==2){
+                    return false;
+                }
+                var priorities = ["first","second","third","forth"];
+                var priority = priorities.indexOf($(this).parent().siblings().first().children().attr("class").slice(8).trim());
+                var content = $(this).parent().siblings().eq(1).text().trim();
+                var start = $(this).parent().siblings().eq(2).html().trim();
+                var end = $(this).parent().siblings().eq(3).html().trim();
+                var id = $(this).data('id');
+                console.log(priority);
+                console.log(id);
+                $(this).parent().parent().parent().parent().wrap("<form action=\"/"+id+"/modify\" class=\"form-inline\" method=\"post\" id=\"modify\"></form>");
+                $(this).parent().parent().html("\
+                      <td>\
+                          <div class=\"form-group\">\
+                            <select name=\"priority\" class=\"form-control text-center\">\
+                                <option value=\"0\" class=\"first\">0</option>\
+                                <option value=\"1\" class=\"second\">1</option>\
+                                <option value=\"2\" class=\"third\">2</option>\
+                                <option value=\"3\" class=\"forth\">3</option>\
+                            </select>\
+                          </div>\
+                      </td>\
+                      <td>\
+                          <div class=\"form-group\">\
+                            <input type=\"text\" value=\"  "+content+"\" class=\"form-control\" name=\"content\">\
+                          </div>\
+                      </td>\
+                      <td>\
+                          <div class=\"form-group\">\
+                            <input type=\"text\" class=\"form-control\" value=\""+start+"\" name=\"start\">\
+                          </div>\
+                      </td>\
+                      <td>\
+                          <div class=\"form-group\">\
+                            <input type=\"text\" class=\"form-control\" value=\""+end+"\" name=\"end\">\
+                          </div>\
+                      </td>\
+                      <td>\
+                          <div class=\"form-group\">\
+                                <button class=\"btn btn-success \" type=\"submit\">提交</button>\
+                                <a href=\"/\" class=\"btn btn-default\">取消</a>\
+                          </div>\
+                      </td>\
+                    ");
+                $("#modify select option[value="+priority+"]").attr("selected","selected");
+            });
+        });
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,31 @@
+Sat Jul 30 09:15:56.852 [initandlisten] MongoDB starting : pid=6733 port=27017 dbpath=./dbdata 32-bit host=windard
+Sat Jul 30 09:15:56.852 [initandlisten] 
+Sat Jul 30 09:15:56.852 [initandlisten] ** NOTE: This is a 32 bit MongoDB binary.
+Sat Jul 30 09:15:56.852 [initandlisten] **       32 bit builds are limited to less than 2GB of data (or less with --journal).
+Sat Jul 30 09:15:56.852 [initandlisten] **       Note that journaling defaults to off for 32 bit and is currently off.
+Sat Jul 30 09:15:56.852 [initandlisten] **       See http://dochub.mongodb.org/core/32bit
+Sat Jul 30 09:15:56.852 [initandlisten] 
+Sat Jul 30 09:15:56.852 [initandlisten] db version v2.4.9
+Sat Jul 30 09:15:56.852 [initandlisten] git version: nogitversion
+Sat Jul 30 09:15:56.852 [initandlisten] build info: Linux comet 3.2.0-58-generic #88-Ubuntu SMP Tue Dec 3 17:37:58 UTC 2013 i686 BOOST_LIB_VERSION=1_54
+Sat Jul 30 09:15:56.852 [initandlisten] allocator: tcmalloc
+Sat Jul 30 09:15:56.852 [initandlisten] options: { dbpath: "./dbdata", logpath: "./dblog/mongodb.log" }
+Sat Jul 30 09:15:56.948 [FileAllocator] allocating new datafile ./dbdata/local.ns, filling with zeroes...
+Sat Jul 30 09:15:56.948 [FileAllocator] creating directory ./dbdata/_tmp
+Sat Jul 30 09:15:56.990 [FileAllocator] done allocating datafile ./dbdata/local.ns, size: 16MB,  took 0.022 secs
+Sat Jul 30 09:15:56.991 [FileAllocator] allocating new datafile ./dbdata/local.0, filling with zeroes...
+Sat Jul 30 09:15:57.013 [FileAllocator] done allocating datafile ./dbdata/local.0, size: 16MB,  took 0.022 secs
+Sat Jul 30 09:15:57.015 [initandlisten] ERROR: listen(): bind() failed errno:98 Address already in use for socket: 0.0.0.0:27017
+Sat Jul 30 09:15:57.015 [initandlisten] ERROR:   addr already in use
+Sat Jul 30 09:15:57.015 [websvr] ERROR: listen(): bind() failed errno:98 Address already in use for socket: 0.0.0.0:28017
+Sat Jul 30 09:15:57.015 [initandlisten] now exiting
+Sat Jul 30 09:15:57.015 [websvr] ERROR:   addr already in use
+Sat Jul 30 09:15:57.015 dbexit: 
+Sat Jul 30 09:15:57.015 [initandlisten] shutdown: going to close listening sockets...
+Sat Jul 30 09:15:57.015 [initandlisten] shutdown: going to flush diaglog...
+Sat Jul 30 09:15:57.015 [initandlisten] shutdown: going to close sockets...
+Sat Jul 30 09:15:57.015 [initandlisten] shutdown: waiting for fs preallocator...
+Sat Jul 30 09:15:57.015 [initandlisten] shutdown: closing all files...
+Sat Jul 30 09:15:57.015 [initandlisten] closeAllFiles() finished
+Sat Jul 30 09:15:57.015 [initandlisten] shutdown: removing fs lock...
+Sat Jul 30 09:15:57.015 dbexit: really exiting now

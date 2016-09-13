@@ -1,0 +1,26 @@
+    <% include header.ejs %>
+
+            <form action="" method="post" class="form-horizontal">
+                <legend><h3>用户登陆</h3></legend>
+                <div class="form-group">
+                    <label for="username" class="col-md-2 control-label">用户名</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-md-2 control-label">密码</label>
+                    <div class="col-md-9">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group form-actions text-center">
+                <br>
+                    <button type="submit" class="btn btn-primary btn-lg" name="submit">登陆</button>
+                    <a href="/" class="btn btn-default btn-lg">取消</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <%include footer.ejs %>

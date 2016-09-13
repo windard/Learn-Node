@@ -1,0 +1,39 @@
+    <% include header.ejs %>
+
+            <div class="well jumbotron">
+            <% if(user){%>
+                <div class="container">
+                    <form action="/post" class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="content" name="content">
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-success" type="button" onclick="submit()"><span class="glyphicon glyphicon-comment icon-white" aria-hidden="true">&nbsp;</span>发言</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            <%}else{%>
+                <h1>欢迎来到 MicroBlog</h1>
+                <p class="small">这是一个基于 nodejs 的微博系统</p>
+                <p class="small">This is my first try in node with exoress4 , God Bless Me!</p>
+                <a href="/login" class="btn btn-lg btn-primary">登陆</a>
+                <a href="/reg" class="btn btn-lg btn-danger">立即注册</a>
+            <%}%>
+            </div>
+            <div class="row">
+                    <% posts.forEach(function(post){%>
+                        <div class="col-md-4">
+                            <div class="container-fluid">
+                                <h2><%= post.username%></h2>
+                                <small class="small"><time><%= post.time%></time></small>
+                                <p><%= post.post%></p>
+                            </div>
+                        </div>
+                    <%})%>
+            </div>
+        </div>
+    </div>
+
+    <%include footer.ejs %>
