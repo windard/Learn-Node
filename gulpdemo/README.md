@@ -10,3 +10,8 @@ cnpm install gulp --save
 cnpm install jshint gulp-jshint gulp-concat gulp-uglify gulp-rename gulp-minify-html gulp-minify-css --save
 ```
 
+全局安装 gulp
+
+```
+cnpm install gulp -g
+```
